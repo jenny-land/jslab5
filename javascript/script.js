@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-  /**
-   * Shortcut variables
-   */
+  // --- AUDIO SETUP ---
   const lowRider = document.querySelector(".low-rider");
   const leverage = document.querySelector(".leverage");
   const ff = document.getElementById("ff");
@@ -11,25 +9,16 @@ function init() {
   const normal = document.getElementById("normal");
   const pick = document.getElementById("pick");
 
-  /**
-   * prepare the audio and video for playing
-   */
-  lowRider.src = "a/money.mp3";
+  lowRider.src = "a/low-rider.mp3";
   lowRider.load();
   lowRider.volume = 0.5;
 
-  leverage.volume = 0.5;
+  if (leverage) leverage.volume = 0.5;
 
-  /**
-   * Audio control buttons
-   */
   ff.addEventListener("click", () => (lowRider.playbackRate = 2));
   slo.addEventListener("click", () => (lowRider.playbackRate = 0.5));
   normal.addEventListener("click", () => (lowRider.playbackRate = 1));
 
-  /**
-   * Song picker
-   */
   pick.addEventListener("change", (e) => {
     let time = lowRider.currentTime;
     lowRider.src = e.target.value;
@@ -38,19 +27,16 @@ function init() {
     lowRider.currentTime = time;
   });
 
-  /**
-   * Subtitle setup
-   */
+  // --- VIDEO SETUP WITH SUBTITLES ---
   const video = document.getElementById("video");
   const subtitles = document.getElementById("subtitles");
   const videoContainer = document.getElementById("video-container");
 
-  // Hide all subtitles by default
+  // Hide all subtitles initially
   for (const track of video.textTracks) {
     track.mode = "hidden";
   }
 
-  // Array to store subtitle menu buttons
   const subtitleMenuButtons = [];
   let subtitlesMenu;
 
@@ -68,7 +54,7 @@ function init() {
     videoContainer.appendChild(subtitlesMenu);
   }
 
-  // Create each menu item (helper function)
+  // Create subtitle menu items
   function createMenuItem(id, lang, label) {
     const listItem = document.createElement("li");
     const button = listItem.appendChild(document.createElement("button"));
@@ -80,14 +66,12 @@ function init() {
     button.appendChild(document.createTextNode(label));
 
     button.addEventListener("click", () => {
-      // Set all buttons to inactive
-      subtitleMenuButtons.forEach((btn) => {
-        btn.setAttribute("data-state", "inactive");
-      });
+      subtitleMenuButtons.forEach((btn) =>
+        btn.setAttribute("data-state", "inactive")
+      );
 
       const lang = button.getAttribute("lang");
 
-      // Enable selected subtitles
       for (const track of video.textTracks) {
         if (track.language === lang) {
           track.mode = "showing";
@@ -97,7 +81,6 @@ function init() {
         }
       }
 
-      // Hide menu after selection
       subtitlesMenu.style.display = "none";
     });
 
@@ -105,7 +88,7 @@ function init() {
     return listItem;
   }
 
-  // Toggle subtitle menu visibility when CC button clicked
+  // Toggle subtitle menu visibility
   subtitles.addEventListener("click", () => {
     if (subtitlesMenu) {
       subtitlesMenu.style.display =
