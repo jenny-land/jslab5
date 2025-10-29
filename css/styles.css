@@ -1,34 +1,62 @@
-hr {
-  margin: 3rem 0;
+body {
+  background-color: #111;
+  color: #f0f0f0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 1rem;
 }
 
-/* Audio section styling */
-.audio-controls {
-  margin-top: 1rem;
+section {
+  margin-bottom: 3rem;
+}
+
+/* Video container centers and sizes properly */
+#video-container {
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Video fills the container */
+#video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Controls styling */
+.controls {
   display: flex;
-  gap: 0.5rem;
-}
-
-/* Subtitle button styling */
-.controls button[data-state="subtitles"] {
-  padding: 2px;
-}
-
-.controls button[data-state="subtitles"] span {
-  max-width: 100%;
-  width: 2rem;
-  height: 100%;
-  display: inline-flex;
-  align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: #666666;
-  background-color: black;
-  border-radius: 4px;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+  background: rgba(20, 20, 20, 0.9);
 }
 
-/* --- Subtitles Menu Styling (from your update) --- */
+button {
+  background-color: #222;
+  color: white;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #444;
+}
+
+/* Subtitles menu */
 .subtitles-menu {
   display: none;
   position: absolute;
@@ -39,8 +67,6 @@ hr {
   margin: 0;
   width: 100px;
   padding: 10px;
-  border-radius: 4px;
-  z-index: 10;
 }
 
 .subtitles-menu li {
@@ -58,7 +84,17 @@ hr {
   border-radius: 2px;
 }
 
-.subtitles-button[data-state="active"] {
-  background-color: #fff;
-  color: #000;
+/* On-screen video info (time + speed) */
+.video-info {
+  position: absolute;
+  bottom: 4.2rem;
+  left: 10px;
+  color: #fff;
+  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }

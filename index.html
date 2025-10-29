@@ -11,13 +11,15 @@
   <body>
     <h1>Media Player with Accessibility</h1>
 
-    <!-- AUDIO SECTION -->
+    <!-- =================== AUDIO SECTION =================== -->
     <section>
       <h2>Audio Player</h2>
       <p>
-        Example audio clip with multiple sources for broad browser support.
+        Example audio clip with multiple formats for broad browser support.
       </p>
-      <audio class="low-rider" controls>
+
+      <!-- Audio Player -->
+      <audio id="audio" controls preload="metadata">
         <source src="a/low-rider.webm" type="audio/webm" />
         <source src="a/low-rider.mp3" type="audio/mp3" />
         <p>
@@ -26,6 +28,7 @@
         </p>
       </audio>
 
+      <!-- Custom Audio Controls -->
       <div class="audio-controls">
         <button id="ff">Fast Forward</button>
         <button id="slo">Slow Motion</button>
@@ -40,7 +43,7 @@
 
     <hr />
 
-    <!-- VIDEO SECTION -->
+    <!-- =================== VIDEO SECTION =================== -->
     <section>
       <h2>Video Player</h2>
       <p>
@@ -48,7 +51,7 @@
       </p>
 
       <div id="video-container">
-        <video id="video" controls preload="metadata">
+        <video id="video" preload="metadata">
           <source src="v/leverage-a-synergy.mp4" type="video/mp4" />
           <source src="v/leverage-a-synergy.webm" type="video/webm" />
           <track
@@ -73,15 +76,18 @@
           </p>
         </video>
 
-        <div id="video-controls" class="controls" data-state="hidden">
-          <button id="play-pause" type="button" data-state="play">Play/Pause</button>
+        <!-- Custom Video Controls -->
+        <div id="video-controls" class="controls">
+          <button id="play-pause" type="button" data-state="play">Play</button>
           <button id="stop" type="button" data-state="stop">Stop</button>
+
           <div class="progress">
             <progress id="progress" value="0">
               <span id="progress-bar"></span>
             </progress>
           </div>
-          <button id="mute" type="button" data-state="mute">Mute/Unmute</button>
+
+          <button id="mute" type="button" data-state="mute">Mute</button>
           <button id="vol-inc" type="button" data-state="vol-up">Vol+</button>
           <button id="vol-dec" type="button" data-state="vol-down">Vol-</button>
           <button id="fs" type="button" data-state="go-fullscreen">Fullscreen</button>
