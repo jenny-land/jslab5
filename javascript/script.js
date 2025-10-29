@@ -1,54 +1,68 @@
 document.addEventListener("DOMContentLoaded", init);
 
 function init() {
-    /**
-     * Shortcut variables
-     */
-    const lowRider = document.querySelector(".low-rider");
-    const leverage = document.querySelector(".leverage");
-    const ff = document.getElementById("ff");
-    const slo = document.getElementById("slo");
-    const normal = document.getElementById("normal");
-    const pick = document.getElementById("pick");
+  /**
+   * Shortcut variables
+   */
+  const lowRider = document.querySelector(".low-rider");
+  const leverage = document.querySelector(".leverage");
+  const ff = document.getElementById("ff");
+  const slo = document.getElementById("slo");
+  const normal = document.getElementById("normal");
+  const pick = document.getElementById("pick");
 
-    /**
-     * prepare the audio and video for playing
-     */
-    lowRider.src = "a/money.mp3";
+  /**
+   * prepare the audio and video for playing
+   */
+  lowRider.src = "a/money.mp3";
+  lowRider.load();
+  lowRider.volume = 0.5;
+
+  leverage.volume = 0.5;
+
+  /**
+   * Audio control buttons
+   */
+  ff.addEventListener("click", () => (lowRider.playbackRate = 2));
+  slo.addEventListener("click", () => (lowRider.playbackRate = 0.5));
+  normal.addEventListener("click", () => (lowRider.playbackRate = 1));
+
+  /**
+   * Song picker
+   */
+  pick.addEventListener("change", (e) => {
+    let time = lowRider.currentTime;
+    lowRider.src = e.target.value;
     lowRider.load();
-    lowRider.volume = 0.5;
+    lowRider.play();
+    lowRider.currentTime = time;
+  });
 
-    //set video's initial volume
-    leverage.volume = 0.5;
+  /**
+   * Subtitle setup
+   */
+  const video = document.getElementById("video");
+  const subtitles = document.getElementById("subtitles");
 
-    /**
-     * create the button event listeners to control the audio
-     */
+  // hide all subtitles by default
+  for (const track of video.textTracks) {
+    track.mode = "hidden";
+  }
 
-    ff.addEventListener("click", (e) => {
-        lowRider.playbackRate = 2;
-    });
-
-    slo.addEventListener("click", (e) => {
-        lowRider.playbackRate = 0.5;
-    });
-
-    normal.addEventListener("click", (e) => {
-        lowRider.playbackRate = 1;
-    });
-
-    /**
-     * select lists emit a "change" event when the choice is changed
-     */
-    pick.addEventListener("change", (e) => {
-        // save the audio's current place in the song.
-        let time = lowRider.currentTime;
-
-        lowRider.src = e.target.value;
-        lowRider.load();
-        lowRider.play();
-
-        // set the new song to the same place as the previous one.
-        lowRider.currentTime = time;
-    });
-} // end init function
+  // Toggle subtitles on click
+  subtitles.addEventListener("click", () => {
+    let showing = false;
+    for (const track of video.textTracks) {
+      if (track.mode === "showing") {
+        track.mode = "hidden";
+      } else {
+        track.mode = "showing";
+        showing = true;
+      }
+    }
+    subtitles.querySelector("span").style.backgroundColor = showing
+      ? "white"
+      : "black";
+    subtitles.querySelector("span").style.color = showing ? "black" : "#666666";
+  });
+}
