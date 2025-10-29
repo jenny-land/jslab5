@@ -11,6 +11,15 @@ section {
   margin-bottom: 3rem;
 }
 
+footer {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #aaa;
+  text-align: center;
+  border-top: 1px solid #333;
+  padding-top: 1rem;
+}
+
 /* Video container centers and sizes properly */
 #video-container {
   position: relative;
