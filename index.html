@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lab 5</title>
+        <link rel="stylesheet" href="c/main.css" />
+        <script src="j/main.js" defer></script>
+    </head>
+    <body>
+        <h1>Rich Media Demo</h1>
+
+        <h2>Audio with custom controls</h2>
+        <audio class="low-rider" controls>
+            <source src="a/low-rider.webm" type="audio/webm" />
+            <source src="a/low-rider.mp3" type="audio/mp3" />
+            <p>
+                Here is a link to the audio file itself
+                <a href="a/low-rider.mp3">Audio here</a>
+            </p>
+        </audio>
+        <div class="audio-controls">
+            <button id="ff">ff</button>
+            <button id="slo">slow mo</button>
+            <button id="normal">normal</button>
+            <select name="pick" id="pick">
+                <option value="">pick a song</option>
+                <option value="a/low-rider.mp3">Low Rider</option>
+                <option value="a/money.mp3">Money</option>
+            </select>
+        </div>
+
+        <hr />
+
+        <h2>Basic Video</h2>
+        <video class="leverage" controls>
+            <source src="v/leverage-a-synergy.webm" type="video/webm" />
+            <source src="v/leverage-a-synergy.mp4" type="video/mp4" />
+            <p>
+                Here is a link to the video file itself
+                <a href="v/leverage-a-synergy.mp4">Video here</a>
+            </p>
+        </video>
+    </body>
+</html>
